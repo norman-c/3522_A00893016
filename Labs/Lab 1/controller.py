@@ -5,6 +5,11 @@ from asteroid import Asteroid
 
 
 def simulate(seconds):
+    """
+    Simulates movement of the asteroids and displays the simulation
+    :param seconds: an int for how many seconds to simulate
+    :return:
+    """
     delta = datetime.datetime.now() + datetime.timedelta(seconds=1)
     time.sleep(1 - (delta.microsecond / 1000000))
     print("Simultation Start Time: {}".format(datetime.datetime.fromtimestamp(time.time())))
@@ -24,6 +29,9 @@ class Controller:
     starting_position = (0, 0, 0)
 
     def __init__(self):
+        """
+        Creates 100 asteroids and stores them into a list
+        """
         for i in range(1, 101):
             circumference = Asteroid.calc_circumference(random.randint(1, 4))
             temp_asteroid = Asteroid(circumference, Controller.starting_position,
@@ -33,7 +41,7 @@ class Controller:
 
 def main():
     temp = Controller()
-    simulate(1)
+    simulate(2)
 
 
 if __name__ == "__main__":
