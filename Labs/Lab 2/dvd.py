@@ -1,13 +1,13 @@
 from item import Item
 
 
-class Book(Item):
+class Dvd(Item):
     """
     Represents a single book in a library which is identified through
     it's call number.
     """
 
-    def __init__(self, call_num, title, num_copies, author):
+    def __init__(self, call_num, title, num_copies, release_date, region_code):
         """
         :param call_num: a string
         :param title: a string
@@ -19,7 +19,8 @@ class Book(Item):
         self._call_num = call_num
         self._title = title
         self._num_copies = num_copies
-        self._author = author
+        self._release_date = release_date
+        self._region_code = region_code
 
     def get_title(self):
         pass
@@ -47,6 +48,14 @@ class Book(Item):
         """
         return self._call_num
 
+    @property
+    def release_date(self):
+        return self._release_date
+
+    @property
+    def region_code(self):
+        return self._region_code
+
     # @call_number.setter
     # def call_number(self, value):
     #     """
@@ -63,7 +72,8 @@ class Book(Item):
         pass
 
     def __str__(self):
-        return f"---- Book: {self._title} ----\n" \
+        return f"---- DVD: {self._title} ----\n" \
                f"Call Number: {self.call_number}\n" \
                f"Number of Copies: {self._num_copies}\n" \
-               f"Author: {self._author}"
+               f"Release Date: {self._release_date}\n" \
+               f"Region Code: {self._region_code}"

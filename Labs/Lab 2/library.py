@@ -2,11 +2,13 @@
 from book import Book
 import difflib
 
+
 class Library:
     """
     The Library consists of a list of books and provides an
     interface for users to check out, return and find books.
     """
+
     def __init__(self, book_list):
         """
         Intialize the library with a list of books.
@@ -31,8 +33,6 @@ class Library:
         else:
             print(f"No copies left for call number {call_number}"
                   f". Checkout failed.")
-
-
 
     def return_book(self, call_number):
         """
@@ -65,8 +65,8 @@ class Library:
             print("7. Quit")
             string_input = input("Please enter your choice (1-7)")
 
-            #handle user pressing only enter in menu
-            if(string_input == ''):
+            # handle user pressing only enter in menu
+            if (string_input == ''):
                 continue
 
             user_input = int(string_input)
@@ -121,8 +121,6 @@ class Library:
                 break
         return found_book
 
-
-
     def display_available_books(self):
         """
         Display all the books in the library.
@@ -131,7 +129,6 @@ class Library:
         print("--------------", end="\n\n")
         for library_book in self._book_list:
             print(library_book)
-
 
 
 def generate_test_books():
