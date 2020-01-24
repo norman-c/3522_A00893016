@@ -4,30 +4,11 @@ from library_item_generator import LibraryItemGenerator
 
 class Catalogue:
 
-    def __init__(self, item_list):
-        self._item_list = item_list
+    def __init__(self):
+        self._item_list = LibraryItemGenerator.generate_test_items()
 
     def add_item(self):
         self._item_list.append(LibraryItemGenerator.create_item())
-
-    def add_book(self):
-        call_number = input("Enter Call Number: ")
-        title = input("Enter title: ")
-        num_copies = int(input("Enter number of copies "
-                               "(positive number): "))
-        book_data = (call_number, title, num_copies)
-        author = input("Enter Author Name: ")
-        new_book = Book(book_data[0], book_data[1], book_data[2], author)
-
-        found_book = self._retrieve_book_by_call_number(
-            new_book.call_number)
-        if found_book:
-            print(f"Could not add book with call number "
-                  f"{new_book.call_number}. It already exists. ")
-        else:
-            self._book_list.append(new_book)
-            print("book added successfully! book details:")
-            print(new_book)
 
     def find_books(self, title):
         title_list = []
@@ -61,3 +42,12 @@ class Catalogue:
             return True
         else:
             return False
+
+    def display_available_books(self):
+        """
+        Display all the books in the library.
+        """
+        print("Books List")
+        print("--------------", end="\n\n")
+        for item in self._item_list:
+            print(item)

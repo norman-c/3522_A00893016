@@ -2,6 +2,7 @@
 from book import Book
 import difflib
 
+from catalogue import Catalogue
 from dvd import Dvd
 
 
@@ -11,12 +12,12 @@ class Library:
     interface for users to check out, return and find books.
     """
 
-    def __init__(self, book_list):
+    def __init__(self, catalogue):
         """
         Intialize the library with a list of books.
         :param book_list: a sequence of book objects.
         """
-        self._book_list = book_list
+        self._catalogue = catalogue
 
     def check_out(self, call_number):
         """
@@ -74,7 +75,7 @@ class Library:
             user_input = int(string_input)
 
             if user_input == 1:
-                self.display_available_books()
+                self._catalogue.display_available_books()
                 user_input = input("Press Enter to continue")
             elif user_input == 2:
                 call_number = input("Enter the call number of the book"
@@ -123,23 +124,13 @@ class Library:
                 break
         return found_book
 
-    def display_available_books(self):
-        """
-        Display all the books in the library.
-        """
-        print("Books List")
-        print("--------------", end="\n\n")
-        for library_book in self._book_list:
-            print(library_book)
-
-
 
 def main():
     """
     Creates a library with dummy data and prompts the user for input.
     """
-    book_list = generate_test_books()
-    my_epic_library = Library(book_list)
+    lib_catalogue = Catalogue()
+    my_epic_library = Library(lib_catalogue)
     my_epic_library.display_library_menu()
 
 

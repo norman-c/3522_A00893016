@@ -17,7 +17,7 @@ class LibraryItemGenerator:
             Book("631.495.302", "Harry Potter 3", 4, "J K Rowling"),
             Book("123.02.204", "The Cat in the Hat", 1, "Dr. Seuss"),
             Dvd("425.63.775", "Toy Story", 2, "10-10-2004", "NA"),
-            Journal("874.234.863", "Science Journal", 1, "Dr. Smart", "Pearsons")
+            Journal("874.234.863", "Science Journal", 1, "Dr. Smart", 7, "Pearsons")
         ]
         return item_list
 
@@ -29,9 +29,9 @@ class LibraryItemGenerator:
         print("3. Dvd")
         string_input = input("Please enter your choice (1-3)")
 
-        user_input = int(string_input
+        user_input = int(string_input)
         if user_input == 1:
-           return LibraryItemGenerator.__create_book()
+            return LibraryItemGenerator.__create_book()
         if user_input == 2:
             return LibraryItemGenerator.__create_journal()
         if user_input == 3:
@@ -58,7 +58,7 @@ class LibraryItemGenerator:
         author = input("Enter Author Name: ")
         issue_number = input("Enter Issue Number: ")
         publisher = input("Enter Publisher: ")
-        new_journal = Journal(call_number, title, num_copies, author,issue_number,publisher)
+        new_journal = Journal(call_number, title, num_copies, author, issue_number, publisher)
 
         return new_journal
 
@@ -70,6 +70,6 @@ class LibraryItemGenerator:
                                "(positive number): "))
         release_date = input("Enter release date: ")
         region_code = input("Enter region_code: ")
-        new_dvd = Book(call_number, title, num_copies, release_date,region_code)
+        new_dvd = Book(call_number, title, num_copies, release_date, region_code)
 
         return new_dvd

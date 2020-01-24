@@ -37,7 +37,7 @@ class Journal(Item):
         return self._publisher
 
     @property
-    def issue_number)self:
+    def issue_number(self):
         return self._issue_number
 
     def check_availability(self):
