@@ -133,20 +133,6 @@ class Library:
             print(library_book)
 
 
-def generate_test_books():
-    """
-    Return a list of books with dummy data.
-    :return: a list
-    """
-    book_list = [
-        Book("100.200.300", "Harry Potter 1", 2, "J K Rowling"),
-        Book("999.224.854", "Harry Potter 2", 5, "J K Rowling"),
-        Book("631.495.302", "Harry Potter 3", 4, "J K Rowling"),
-        Book("123.02.204", "The Cat in the Hat", 1, "Dr. Seuss"),
-        Dvd("dsssdfds","dsdssdds",2,"dssddssds","sdsdsdsds")
-    ]
-    return book_list
-
 
 def main():
     """
