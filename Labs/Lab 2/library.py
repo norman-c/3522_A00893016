@@ -2,6 +2,8 @@
 from book import Book
 import difflib
 
+from dvd import Dvd
+
 
 class Library:
     """
@@ -140,7 +142,8 @@ def generate_test_books():
         Book("100.200.300", "Harry Potter 1", 2, "J K Rowling"),
         Book("999.224.854", "Harry Potter 2", 5, "J K Rowling"),
         Book("631.495.302", "Harry Potter 3", 4, "J K Rowling"),
-        Book("123.02.204", "The Cat in the Hat", 1, "Dr. Seuss")
+        Book("123.02.204", "The Cat in the Hat", 1, "Dr. Seuss"),
+        Dvd("dsssdfds","dsdssdds",2,"dssddssds","sdsdsdsds")
     ]
     return book_list
 

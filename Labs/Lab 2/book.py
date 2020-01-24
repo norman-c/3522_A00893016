@@ -35,16 +35,6 @@ class Book(Item):
 
     @property
     def call_number(self):
-        """
-        Right, this here is another way of using properties.
-        We use decorators. The @property decorator defines a property
-        that only allows us to GET a value and not set one.
-
-        I want to point out that I have not expected you to do this in
-        your labs. I'm using this as an opportunity to introduce you to
-        a new way of avoiding mechanical getters and setters.
-        :return:
-        """
         return self._call_num
 
     # @call_number.setter

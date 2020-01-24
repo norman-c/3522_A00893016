@@ -1,14 +1,16 @@
 from item import Item
 
 
-class Dvd(Item):
+class Journal(Item):
 
-    def __init__(self, call_num, title, num_copies, release_date, region_code):
+    def __init__(self, call_num, title, num_copies, author, issue_number, publisher):
+
         self._call_num = call_num
         self._title = title
         self._num_copies = num_copies
-        self._release_date = release_date
-        self._region_code = region_code
+        self._author = author
+        self._issue_number = issue_number
+        self._publisher = publisher
 
     def get_title(self):
         pass
@@ -27,19 +29,24 @@ class Dvd(Item):
         return self._call_num
 
     @property
-    def release_date(self):
-        return self._release_date
+    def author(self):
+        return self._author
 
     @property
-    def region_code(self):
-        return self._region_code
+    def publisher(self):
+        return self._publisher
+
+    @property
+    def issue_number)self:
+        return self._issue_number
 
     def check_availability(self):
         pass
 
     def __str__(self):
-        return f"---- DVD: {self._title} ----\n" \
+        return f"---- Journal: {self._title} ----\n" \
                f"Call Number: {self.call_number}\n" \
                f"Number of Copies: {self._num_copies}\n" \
-               f"Release Date: {self._release_date}\n" \
-               f"Region Code: {self._region_code}"
+               f"Author: {self._author}\n" \
+               f"Issue Number: {self._issue_number}\n" \
+               f"Publisher: {self._publisher}"
