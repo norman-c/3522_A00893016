@@ -10,44 +10,92 @@ class Catalogue:
     def add_item(self):
         self._item_list.append(LibraryItemGenerator.create_item())
 
-    def find_books(self, title):
+    def return_item(self, call_number):
+        """
+        Return an item with the given call number from the library.
+        :param call_number: a string
+        :precondition call_number: a unique identifier
+        """
+        status = self.increment_item_count(call_number)
+        if status:
+            print("item returned successfully!")
+        else:
+            print(f"Could not find item with call number {call_number}"
+                  f". Return failed.")
+
+    def _retrieve_item_by_call_number(self, call_number):
+        """
+        A private method that encapsulates the retrieval of an item with
+        the given call number from the library.
+        :param call_number: a string
+        :return: item object if found, None otherwise
+        """
+        found_item = None
+        for item in self._item_list:
+            if item.call_number == call_number:
+                found_item = item
+                break
+        return found_item
+
+    def check_out(self, call_number):
+        """
+        Check out an item with the given call number from the library.
+        :param call_number: a string
+        :precondition call_number: a unique identifier
+        """
+        library_item = self._retrieve_item_by_call_number(call_number)
+
+        if library_item is None:
+            print(f"Could not find item with call number {call_number}"
+                  f". Checkout failed.")
+            return
+        if library_item.check_availability():
+
+            status = self.reduce_item_count(call_number)
+            if status:
+                print("Checkout complete!")
+        else:
+            print(f"No copies left for call number {call_number}"
+                  f". Checkout failed.")
+
+    def find_items(self, title):
         title_list = []
-        for library_book in self._book_list:
-            title_list.append(library_book.get_title())
+        for library_item in self._item_list:
+            title_list.append(library_item.get_title())
         results = difflib.get_close_matches(title, title_list, cutoff=0.5)
         return results
 
-    def remove_book(self, call_number):
-        found_book = self._retrieve_book_by_call_number(call_number)
-        if found_book:
-            self._book_list.remove(found_book)
-            print(f"Successfully removed {found_book.get_title()} with "
+    def remove_item(self, call_number):
+        found_item = self._retrieve_item_by_call_number(call_number)
+        if found_item:
+            self._item_list.remove(found_item)
+            print(f"Successfully removed {found_item.get_title()} with "
                   f"call number: {call_number}")
         else:
-            print(f"book with call number: {call_number} not found.")
+            print(f"item with call number: {call_number} not found.")
 
-    def reduce_book_count(self, call_number):
-        library_book = self._retrieve_book_by_call_number(call_number)
-        if library_book:
-            library_book.decrement_number_of_copies()
+    def reduce_item_count(self, call_number):
+        library_item = self._retrieve_item_by_call_number(call_number)
+        if library_item:
+            library_item.decrement_number_of_copies()
             return True
         else:
             return False
 
-    def increment_book_count(self, call_number):
+    def increment_item_count(self, call_number):
 
-        library_book = self._retrieve_book_by_call_number(call_number)
-        if library_book:
-            library_book.increment_number_of_copies()
+        library_item = self._retrieve_item_by_call_number(call_number)
+        if library_item:
+            library_item.increment_number_of_copies()
             return True
         else:
             return False
 
-    def display_available_books(self):
+    def display_available_items(self):
         """
-        Display all the books in the library.
+        Display all the items in the library.
         """
-        print("Books List")
+        print("Item List")
         print("--------------", end="\n\n")
         for item in self._item_list:
             print(item)

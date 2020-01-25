@@ -4,7 +4,6 @@ from item import Item
 class Journal(Item):
 
     def __init__(self, call_num, title, num_copies, author, issue_number, publisher):
-
         self._call_num = call_num
         self._title = title
         self._num_copies = num_copies
@@ -13,13 +12,13 @@ class Journal(Item):
         self._publisher = publisher
 
     def get_title(self):
-        pass
+        return super().get_title()
 
     def increment_number_of_copies(self):
-        pass
+        super().increment_number_of_copies()
 
     def decrement_number_of_copies(self):
-        pass
+        super().decrement_number_of_copies()
 
     def get_num_copies(self):
         pass
@@ -41,7 +40,7 @@ class Journal(Item):
         return self._issue_number
 
     def check_availability(self):
-        pass
+        return super().check_availability()
 
     def __str__(self):
         return f"---- Journal: {self._title} ----\n" \

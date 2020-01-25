@@ -11,13 +11,13 @@ class Dvd(Item):
         self._region_code = region_code
 
     def get_title(self):
-        pass
+        return super().get_title()
 
     def increment_number_of_copies(self):
-        pass
+        super().increment_number_of_copies()
 
     def decrement_number_of_copies(self):
-        pass
+        super().decrement_number_of_copies()
 
     def get_num_copies(self):
         pass
@@ -35,7 +35,7 @@ class Dvd(Item):
         return self._region_code
 
     def check_availability(self):
-        pass
+        return super().check_availability()
 
     def __str__(self):
         return f"---- DVD: {self._title} ----\n" \

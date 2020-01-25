@@ -70,6 +70,6 @@ class LibraryItemGenerator:
                                "(positive number): "))
         release_date = input("Enter release date: ")
         region_code = input("Enter region_code: ")
-        new_dvd = Book(call_number, title, num_copies, release_date, region_code)
+        new_dvd = Dvd(call_number, title, num_copies, release_date, region_code)
 
         return new_dvd
