@@ -23,6 +23,10 @@ class LibraryItemGenerator:
 
     @staticmethod
     def create_item():
+        """
+        Gets user input to create item
+        :return: item
+        """
         print("What item are you adding?")
         print("1. Book")
         print("2. Journal")
@@ -39,6 +43,10 @@ class LibraryItemGenerator:
 
     @staticmethod
     def __create_book():
+        """
+        Creates a book
+        :return: book
+        """
         call_number = input("Enter Call Number: ")
         title = input("Enter title: ")
         num_copies = int(input("Enter number of copies "
@@ -51,6 +59,10 @@ class LibraryItemGenerator:
 
     @staticmethod
     def __create_journal():
+        """
+        Creates a journal
+        :return: a journal
+        """
         call_number = input("Enter Call Number: ")
         title = input("Enter title: ")
         num_copies = int(input("Enter number of copies "
@@ -64,6 +76,10 @@ class LibraryItemGenerator:
 
     @staticmethod
     def __create_dvd():
+        """
+        Creates a dvd
+        :return: a dvd
+        """
         call_number = input("Enter Call Number: ")
         title = input("Enter title: ")
         num_copies = int(input("Enter number of copies "

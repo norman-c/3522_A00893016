@@ -8,21 +8,21 @@ from dvd import Dvd
 
 class Library:
     """
-    The Library consists of a list of books and provides an
+    The Library consists of a catalogue and an
     interface for users to check out, return and find books.
     """
 
     def __init__(self, catalogue):
         """
-        Intialize the library with a list of books.
-        :param book_list: a sequence of book objects.
+        Intialize the library with a catalogue
+        :param catalogue: catalogue object
         """
         self._catalogue = catalogue
 
     def display_library_menu(self):
         """
         Display the library menu allowing the user to either access the
-        list of books, check out, return, find, add, remove a book.
+        list of items, check out, return, find, add, remove aa item.
         """
         user_input = None
         while user_input != 7:

@@ -2,19 +2,24 @@ import difflib
 from book import Book
 from library_item_generator import LibraryItemGenerator
 
-class Catalogue:
 
+class Catalogue:
+    """
+    Holds a list of items
+    """
     def __init__(self):
         self._item_list = LibraryItemGenerator.generate_test_items()
 
     def add_item(self):
+        """
+        Add an item to the item list
+        """
         self._item_list.append(LibraryItemGenerator.create_item())
 
     def return_item(self, call_number):
         """
-        Return an item with the given call number from the library.
-        :param call_number: a string
-        :precondition call_number: a unique identifier
+        Returns an item to the list
+        :param call_number: The call_number of the item to be returned
         """
         status = self.increment_item_count(call_number)
         if status:
@@ -59,6 +64,11 @@ class Catalogue:
                   f". Checkout failed.")
 
     def find_items(self, title):
+        """
+        Find an item in the list
+        :param title: A string
+        :return: The results if the item is in the list
+        """
         title_list = []
         for library_item in self._item_list:
             title_list.append(library_item.get_title())
@@ -66,6 +76,11 @@ class Catalogue:
         return results
 
     def remove_item(self, call_number):
+        """
+        Removes an item from the list
+        :param call_number: a string
+        :return: Print confirmation
+        """
         found_item = self._retrieve_item_by_call_number(call_number)
         if found_item:
             self._item_list.remove(found_item)
@@ -75,6 +90,10 @@ class Catalogue:
             print(f"item with call number: {call_number} not found.")
 
     def reduce_item_count(self, call_number):
+        """
+        Reduce count of item in the list
+        :param call_number: a string
+        """
         library_item = self._retrieve_item_by_call_number(call_number)
         if library_item:
             library_item.decrement_number_of_copies()
@@ -83,7 +102,10 @@ class Catalogue:
             return False
 
     def increment_item_count(self, call_number):
-
+        """
+        increase count of item in the list
+        :param call_number: a string
+        """
         library_item = self._retrieve_item_by_call_number(call_number)
         if library_item:
             library_item.increment_number_of_copies()

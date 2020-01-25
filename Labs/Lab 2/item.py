@@ -6,7 +6,7 @@ class Item(ABC):
     @abstractmethod
     def get_title(self):
         """
-        Returns the title of the book
+        Returns the title of the item
         :return: a string
         """
         return self._title
@@ -14,7 +14,7 @@ class Item(ABC):
     @abstractmethod
     def increment_number_of_copies(self):
         """
-        Set's the number of copies of an book
+        Set's the number of copies of an item
         :param value: a positive integer
         """
         self._num_copies += 1
@@ -22,7 +22,7 @@ class Item(ABC):
     @abstractmethod
     def decrement_number_of_copies(self):
         """
-        Set's the number of copies of an book
+        Set's the number of copies of an item
         :param value: a positive integer
         """
         self._num_copies -= 1
@@ -31,7 +31,7 @@ class Item(ABC):
     def get_num_copies(self):
         """
         Returns the number of copies that are available for this
-        specific book.
+        specific item.
         :return: an int
         """
         return self._num_copies
@@ -53,7 +53,7 @@ class Item(ABC):
     @abstractmethod
     def check_availability(self):
         """
-        Returns True if the book is available and False otherwise
+        Returns True if the item is available and False otherwise
         :return: A Boolean
         """
         if self._num_copies > 0:
