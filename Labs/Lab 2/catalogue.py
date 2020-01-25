@@ -1,5 +1,5 @@
 import difflib
-from book import Book
+
 from library_item_generator import LibraryItemGenerator
 
 
@@ -21,7 +21,7 @@ class Catalogue:
         Returns an item to the list
         :param call_number: The call_number of the item to be returned
         """
-        status = self.increment_item_count(call_number)
+        status = self._increment_item_count(call_number)
         if status:
             print("item returned successfully!")
         else:
@@ -56,7 +56,7 @@ class Catalogue:
             return
         if library_item.check_availability():
 
-            status = self.reduce_item_count(call_number)
+            status = self._reduce_item_count(call_number)
             if status:
                 print("Checkout complete!")
         else:
@@ -89,7 +89,7 @@ class Catalogue:
         else:
             print(f"item with call number: {call_number} not found.")
 
-    def reduce_item_count(self, call_number):
+    def _reduce_item_count(self, call_number):
         """
         Reduce count of item in the list
         :param call_number: a string
@@ -101,7 +101,7 @@ class Catalogue:
         else:
             return False
 
-    def increment_item_count(self, call_number):
+    def _increment_item_count(self, call_number):
         """
         increase count of item in the list
         :param call_number: a string
