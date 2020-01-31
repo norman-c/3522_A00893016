@@ -33,6 +33,11 @@ class User():
     def b_balance(self):
         return self._b_balance
 
+
     @property
     def budget(self):
+        """
+        Will maybe create a budget class or as a List
+        :return:
+        """
         return self._budget
