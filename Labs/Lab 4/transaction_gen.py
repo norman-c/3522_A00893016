@@ -1,3 +1,6 @@
+from datetime import datetime
+import time
+
 from transaction import Transaction
 
 
@@ -5,8 +8,12 @@ class TransactionGen:
 
     @staticmethod
     def create_transaction():
+        """
+        Creates a transaction from user input
+        :return: transaction object
+        """
         category = None
-        timestamp = "Timestamp"
+        timestamp = datetime.now()
         amount = int(input("Enter cost of item "
                            "(positive number): "))
         user_input = None
@@ -29,7 +36,6 @@ class TransactionGen:
                 category = "Eating out"
             else:
                 category = "Miscellaneous"
-
 
         store = input("Enter store name: ")
 

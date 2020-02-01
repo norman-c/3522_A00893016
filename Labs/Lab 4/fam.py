@@ -10,6 +10,10 @@ class Fam:
         self._transaction_list = []
 
     def display_transaction_menu(self):
+        """
+        Displays menu for user to interact with
+        :return:
+        """
         user_input = None
         while user_input != 5:
             print("\nWelcome to the F.A.M.!")
@@ -47,13 +51,20 @@ class Fam:
         print("Thank you for using the F.A.M.")
 
     def _display_transactions(self):
+        """
+        Displays the transactions in the list
+        :return:
+        """
         print("\nTransaction List\n")
         for transaction in self._transaction_list:
             print(transaction)
 
 
-
 def load_test_user():
+    """
+    Used to create Fam user for testing 
+    :return:
+    """
     budget = Budget(100, 100, 100, 100)
     return User("Ryan", 11, "good", 2314, "TD", 1234, budget)
 
