@@ -62,7 +62,7 @@ class Fam:
 
 def load_test_user():
     """
-    Used to create Fam user for testing 
+    Used to create Fam user for testing
     :return:
     """
     budget = Budget(100, 100, 100, 100)
