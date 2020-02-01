@@ -3,6 +3,9 @@ from user import User
 
 class Fam:
 
+    def __init__(self, user):
+        self._transaction_list
+        self._user = user
 
     def display_transaction_menu(self):
         user_input = None
@@ -50,3 +53,14 @@ class Fam:
                       " number from 1 - 5.")
 
         print("Thank you for using the F.A.M.")
+
+    def main():
+        """
+        Creates a library with dummy data and prompts the user for input.
+        """
+        new_user = User("Ryan",11,"good",2314,"TD", 1234 , budget)
+        my_fam = Fam(new_user)
+        my_fam.display_transaction_menu()
+
+    if __name__ == '__main__':
+        main()
