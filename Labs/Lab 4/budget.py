@@ -21,3 +21,10 @@ class Budget:
     @property
     def misc(self):
         return self._misc
+
+    def __str__(self):
+        return f"---- Budgets:----\n" \
+               f"Games and Entertainment: ${self._games}\n" \
+               f"Clothing and Accessories: ${self._clothes}\n" \
+               f"Eating out: ${self._food}\n" \
+               f"Miscellaneous: ${self._misc}"

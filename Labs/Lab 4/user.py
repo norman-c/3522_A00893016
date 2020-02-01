@@ -41,3 +41,8 @@ class User():
         :return:
         """
         return self._budget
+
+    def display_bank(self):
+        return f"\nBank Account number: {self._b_num}\n" \
+               f"Bank Name: {self._b_name}\n" \
+               f"Bank Balance: ${self._b_balance}"
