@@ -33,7 +33,6 @@ class User():
     def b_balance(self):
         return self._b_balance
 
-
     @property
     def budget(self):
         """
