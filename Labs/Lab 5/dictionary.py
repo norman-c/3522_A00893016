@@ -1,16 +1,19 @@
-from file_handler import File_handler
+from file_handler import FileHandler
+
+
 class Dictionary:
 
     def __init__(self):
-        self._dictionary = self.load_dictionary("data.json")
+        self._dictionary = self.load_dictionary("data.txt")
         self._loaded = True
 
     def load_dictionary(self, filepath):
-        thisdict = File_handler.load_data(filepath, filepath)
+        thisdict = FileHandler.load_data(filepath, filepath)
         return thisdict
 
     def query_definition(self, word):
         return self._dictionary[word]
+
 
 def main():
     """

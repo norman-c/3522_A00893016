@@ -1,13 +1,13 @@
 import json
 from os import path
 
-class File_handler:
+class FileHandler:
 
     @staticmethod
     def load_data(filepath, file_extension):
-        if(path.exists(filepath)):
-            with open(filepath) as f_in:
-                thisdict = json.load(f_in)
+        if path.exists(filepath):
+            with open(filepath, mode='r', encoding='utf-8') as data_file:
+                thisdict = json.load(data_file)
             print("Dictionary loaded from " + filepath)
             return thisdict
         else:
