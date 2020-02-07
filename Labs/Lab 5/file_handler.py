@@ -9,7 +9,6 @@ class FileHandler:
         try:
             with open(filepath, mode='r', encoding='utf-8') as data_file:
                 this_dict = json.load(data_file)
-            print("Dictionary loaded from " + filepath + "\n")
             return this_dict
         except FileNotFoundError:
             raise InvalidFileTypeError

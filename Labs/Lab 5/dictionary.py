@@ -2,7 +2,6 @@ from file_handler import FileHandler, InvalidFileTypeError
 
 
 class Dictionary:
-
     def __init__(self):
         self._dictionary = self.load_dictionary("data.json")
         self._loaded = True
@@ -17,6 +16,9 @@ class Dictionary:
                 return self._dictionary[key]
         raise KeyError
 
+    @property
+    def loaded(self):
+        return self._loaded
 
 def main():
     definition = ""
@@ -27,13 +29,14 @@ def main():
         print("-----------------------")
         print("Loading dictionary")
         dictionary = Dictionary()
+        print("Dictionary loaded. \n")
         user_input = None
         while user_input != "exitprogram":
             print("Enter exitprogram to exit program.")
             string_input = input("Enter word to look up:")
 
             # handle user pressing only enter in menu
-            if (string_input == ''):
+            if string_input == '':
                 continue
 
             user_input = string_input
