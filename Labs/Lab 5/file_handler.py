@@ -1,18 +1,30 @@
 import json
 from os import path
 
+
 class FileHandler:
 
     @staticmethod
     def load_data(filepath, file_extension):
-        if path.exists(filepath):
+        try:
             with open(filepath, mode='r', encoding='utf-8') as data_file:
-                thisdict = json.load(data_file)
-            print("Dictionary loaded from " + filepath)
-            return thisdict
-        else:
-            print(filepath + " does not exist.")
+                this_dict = json.load(data_file)
+            print("Dictionary loaded from " + filepath + "\n")
+            return this_dict
+        except FileNotFoundError:
+            raise InvalidFileTypeError
 
     @staticmethod
     def write_lines(filepath, lines):
-        return "hi"
+        if path.exists(filepath):
+            with open(filepath, "a") as text_file:
+                text_file.write(lines)
+        else:
+            with open(filepath, "w") as text_file:
+                text_file.write(lines)
+
+
+class InvalidFileTypeError(Exception):
+
+    def __init__(self):
+        pass

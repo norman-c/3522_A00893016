@@ -1,3 +1,3 @@
 import enum
 
-class FileExtentions(enum.Enum):
+class FileExtensions(enum.Enum):
