@@ -10,6 +10,6 @@ class TestDictionary(TestCase):
 
     def test_query_definition(self):
         this_dict = Dictionary()
-        define = ["Site that cannot be used for any purpose, being contaminated by pollutants."]
-        self.assertTrue(this_dict.query_definition("abandoned industrial SITE") == define)
+        define = ["This is not the definition"]
+        self.assertFalse(this_dict.query_definition("abandoned industrial SITE") == define)
 
