@@ -8,6 +8,12 @@ class FileHandler:
 
     @staticmethod
     def load_data(filepath, file_extension):
+        """
+        Loads data from a json or txt file and returns a dictionary
+        :param filepath:
+        :param file_extension:
+        :return:
+        """
         try:
             if FileExtensions.json.name in filepath or FileExtensions.txt.name in filepath:
                 with open(filepath, mode='r', encoding='utf-8') as data_file:
@@ -19,6 +25,12 @@ class FileHandler:
 
     @staticmethod
     def write_lines(filepath, lines):
+        """
+        Writes the given line to a text file
+        :param filepath:
+        :param lines:
+        :return:
+        """
         if path.exists(filepath):
             with open(filepath, "a") as text_file:
                 text_file.write(lines)

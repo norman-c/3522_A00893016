@@ -7,10 +7,20 @@ class Dictionary:
         self._loaded = True
 
     def load_dictionary(self, filepath):
+        """
+        Creates a dictionary from file
+        :param filepath:
+        :return:
+        """
         thisdict = FileHandler.load_data(filepath, filepath)
         return thisdict
 
     def query_definition(self, word):
+        """
+        Gets the definition of the word from dictionary
+        :param word:
+        :return:
+        """
         for key in self._dictionary:
             if key.lower() == word.lower():
                 return self._dictionary[key]
@@ -19,6 +29,7 @@ class Dictionary:
     @property
     def loaded(self):
         return self._loaded
+
 
 def main():
     definition = ""
@@ -57,7 +68,6 @@ def main():
         print("File not found.")
     finally:
         print("Exiting program.")
-
 
 
 if __name__ == '__main__':
