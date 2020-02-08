@@ -1,15 +1,19 @@
 import json
 from os import path
 
+from file_extensions import FileExtensions
+
 
 class FileHandler:
 
     @staticmethod
     def load_data(filepath, file_extension):
         try:
-            with open(filepath, mode='r', encoding='utf-8') as data_file:
-                this_dict = json.load(data_file)
-            return this_dict
+            if FileExtensions.json.name in filepath or FileExtensions.txt.name in filepath:
+                with open(filepath, mode='r', encoding='utf-8') as data_file:
+                    this_dict = json.load(data_file)
+                return this_dict
+            raise FileNotFoundError
         except FileNotFoundError:
             raise InvalidFileTypeError
 
