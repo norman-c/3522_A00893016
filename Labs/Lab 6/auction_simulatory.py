@@ -95,7 +95,8 @@ class Auction:
 
     def simulate_auction(self, item, start_price):
         self.auctioneer.accept_bid(start_price)
-        print("\nThe winner of the auction is: " + str(self.auctioneer.highest_bidder) + " at $" + str(self.auctioneer.highest_bid)+"\n")
+        print("\nThe winner of the auction is: " + str(self.auctioneer.highest_bidder) + " at $" + str(
+            self.auctioneer.highest_bid) + "\n")
         print("Highest Bids Per Bidder")
         for b in self.auctioneer.bidders:
             print("Bidder: " + str(b) + "  Highest Bid: $" + str(b.highest_bid))
@@ -105,19 +106,21 @@ def main():
     bidders = []
 
     # Hardcoding the bidders.
-    bidders.append(Bidder("Jojo", 3000, random.random(), 1.2))
-    bidders.append(Bidder("Melissa", 7000, random.random(), 1.5))
-    bidders.append(Bidder("Priya", 15000, random.random(), 1.1))
-    bidders.append(Bidder("Kewei", 800, random.random(), 1.9))
-    bidders.append(Bidder("Scott", 4000, random.random(), 2))
+    # bidders.append(Bidder("Jojo", 3000, random.random(), 1.2))
+    # bidders.append(Bidder("Melissa", 7000, random.random(), 1.5))
+    # bidders.append(Bidder("Priya", 15000, random.random(), 1.1))
+    # bidders.append(Bidder("Kewei", 800, random.random(), 1.9))
+    # bidders.append(Bidder("Scott", 4000, random.random(), 2))
 
-    # user_input = None
-    # item_name = input("Enter name of item")
-    # item_price = int(input("Enter the starting price"))
-    # num_bidders = int(input("Enter number of bidders"))
-    # for
-
-
+    user_input = None
+    item_name = input("Enter name of item: ")
+    item_price = int(input("Enter the starting price: "))
+    num_bidders = int(input("Enter number of bidders: "))
+    for x in range(num_bidders):
+        name = input("Enter name of bidder: ")
+        budget = int(input("Bidder's budget: "))
+        bid_increase = float(input("Enter bid increase: "))
+        bidders.append(Bidder(name, budget, random.random(), bid_increase))
 
     this_auctioneer = Auctioneer(bidders)
 
