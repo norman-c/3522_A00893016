@@ -104,7 +104,7 @@ class Auction:
 def main():
     bidders = []
 
-    Hardcoding the bidders.
+    # Hardcoding the bidders.
     bidders.append(Bidder("Jojo", 3000, random.random(), 1.2))
     bidders.append(Bidder("Melissa", 7000, random.random(), 1.5))
     bidders.append(Bidder("Priya", 15000, random.random(), 1.1))
