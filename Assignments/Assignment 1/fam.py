@@ -1,7 +1,8 @@
 from budget import Budget
 from transaction_gen import TransactionGen
-from user import User
-
+from user import Angel
+from user import Rebel
+from user import TroubleMaker
 
 class Fam:
 
@@ -66,7 +67,7 @@ def load_test_user():
     :return:
     """
     budget = Budget(100, 100, 100, 100)
-    return User("Ryan", 11, "good", 2314, "TD", 1234, budget)
+    return Rebel("Ryan", 11, 2314, "TD", 1234, budget)
 
 
 def main():
