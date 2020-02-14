@@ -17,7 +17,7 @@ class TransactionGen:
         try:
             amount = int(input("Enter cost of item "
                                "(positive number): "))
-        except Exception:
+        except ValueError:
             print("Invalid cost.")
             return None
         if amount > b_balance:

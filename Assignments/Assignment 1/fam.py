@@ -122,13 +122,15 @@ class Fam:
                                             "You have exceeded more than 120% of the budget for clothing and "
                                             "accessories.")
                                         print(
-                                            "You are now locked out of conducting transactions for clothing and accessories.")
+                                            "You are now locked out of conducting transactions for clothing and "
+                                            "accessories.")
                                         self._user.budgets[1].locked = True
                                     elif self._user.budgets[1].amount < 0:
                                         print("You have exceeded the budget for clothing and accessories.")
                                     elif self._user.budgets[1].amount < seventyFive:
                                         print(
-                                            "You have exceeded more than 75% of the budget for clothing and accessories.")
+                                            "You have exceeded more than 75% of the budget for clothing and "
+                                            "accessories.")
                             elif isinstance(self._user, Rebel):
                                 if self._user.budgets[1].locked:
                                     print("Your are locked out of this category. Cannot complete transaction.")
@@ -146,7 +148,8 @@ class Fam:
                                             self._user.locked = True
                                     elif self._user.budgets[1].amount < fifty:
                                         print(
-                                            "You have exceeded more than 50% of the budget for clothing and accessories.")
+                                            "You have exceeded more than 50% of the budget for clothing and "
+                                            "accessories.")
 
                         elif budget_code == 2:
                             if isinstance(self._user, Angel):
