@@ -1,30 +1,38 @@
 class Budget:
 
-    def __init__(self, games, clothes, food, misc):
-        self._games = games
-        self._clothes = clothes
-        self._food = food
-        self._misc = misc
+    def __init__(self, name, amount):
+        self._name = name
+        self._total = amount
+        self._amount = amount
+        self._locked = False
 
     @property
-    def games(self):
-        return self._games
+    def name(self):
+        return self._name
 
     @property
-    def clothes(self):
-        return self._clothes
+    def amount(self):
+        return self._amount
 
     @property
-    def food(self):
-        return self._food
+    def total(self):
+        return self._total
+
+    @amount.setter
+    def amount(self, value):
+        self._amount = value
 
     @property
-    def misc(self):
-        return self._misc
+    def locked(self):
+        return self._locked
+
+    @locked.setter
+    def locked(self, value):
+        self._locked = value
 
     def __str__(self):
-        return f"---- Budgets:----\n" \
-               f"Games and Entertainment: ${self._games}\n" \
-               f"Clothing and Accessories: ${self._clothes}\n" \
-               f"Eating out: ${self._food}\n" \
-               f"Miscellaneous: ${self._misc}"
+        return f"Category: {self._name}\n" \
+               f"Locked: {self._locked}\n" \
+               f"Amount spent: {self._amount}\n" \
+               f"Amount left: {(self._total - self._amount)}\n" \
+               f"Total budget: {self._total}\n" \

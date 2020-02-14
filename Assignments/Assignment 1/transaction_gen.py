@@ -7,17 +7,24 @@ from transaction import Transaction
 class TransactionGen:
 
     @staticmethod
-    def create_transaction():
+    def create_transaction(b_balance):
         """
         Creates a transaction from user input
         :return: transaction object
         """
-        category = None
+        code = 4
         timestamp = datetime.now()
-        amount = int(input("Enter cost of item "
-                           "(positive number): "))
+        try:
+            amount = int(input("Enter cost of item "
+                               "(positive number): "))
+        except Exception:
+            print("Invalid cost.")
+            return None
+        if amount > b_balance:
+            print("Bank balance too low.")
+            return None
         user_input = None
-        while category is None:
+        while code == 4:
             print("Please select the budget category")
             print("1. Games and Entertainment")
             print("2. Clothes and Accessories")
@@ -28,15 +35,16 @@ class TransactionGen:
             # handle user pressing only enter in menu
             if string_input == '':
                 continue
+            user_input = int(string_input)
             if user_input == 1:
-                category = "Games and Entertainment"
+                code = 0
             elif user_input == 2:
-                category = "Clothes and Accessories"
+                code = 1
             elif user_input == 3:
-                category = "Eating out"
-            else:
-                category = "Miscellaneous"
+                code = 2
+            elif user_input == 4:
+                code = 3
 
         store = input("Enter store name: ")
 
-        return Transaction(timestamp, amount, category, store)
+        return Transaction(timestamp, amount, store, code)
