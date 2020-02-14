@@ -233,7 +233,7 @@ class Fam:
                                     fifty = 0.50 * self._user.budgets[3].total
                                     self._user.budgets[3].amount = self._user.budgets[3].amount - amount
                                     if self._user.budgets[3].amount < self._user.budgets[3].total:
-                                        print("You have exceeded the budget for miscellaneous!")
+                                        print("You have exceeded the budget for miscellaneous!!")
                                         print("You are now locked out for miscellaneous.")
                                         self._user.budgets[3].locked = True
                                         lockCounter = lockCounter + 1
