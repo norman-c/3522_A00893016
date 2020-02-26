@@ -15,7 +15,7 @@ class BookAnalyzer:
     """
 
     # a constant to help filter out common punctuation.
-    COMMON_PUNCTUATION = [",", "*", ";", ".", ":", "(", "[", "]", ")"]
+    COMMON_PUNCTUATION = ",*;.:([])"
 
     def __init__(self):
         self.text = None
@@ -47,51 +47,16 @@ class BookAnalyzer:
         temp_text = []
         for word in self.text:
             temp_word = word
-            temp_word = temp_word.strip(string.punctuation)
+            temp_word = temp_word.translate(str.maketrans('', '', self.COMMON_PUNCTUATION))
             temp_text.append(temp_word)
-        self.text = temp_text
-
-        # # remove common punctuation from words
-        # temp_text = []
-        # for word in self.text:
-        #     temp_word = word
-        #     for punctuation in self.COMMON_PUNCTUATION:
-        #         temp_word = temp_word.replace(punctuation, '')
-        #     temp_text.append(temp_word)
-        # self.text = temp_text
-
-    # @staticmethod
-    # def is_unique(word, word_list):
-    #     """
-    #     Checks to see if the given word appears in the provided sequence.
-    #     This check is case in-sensitive.
-    #     :param word: a string
-    #     :param word_list: a sequence of words
-    #     :return: True if not found, false otherwise
-    #     """
-    #     for a_word in word_list:
-    #         if word == a_word:
-    #             return False
-    #     return True
-
-    def find_unique_words(self):
-        """
-        Filters out all the words that only appear once in the text.
-        :return: a list of all the unique words.
-        """
-        # temp_text = set(self.text)
-        # unique_words = []
-        # while temp_text:
-        #     word = temp_text.pop()
-        #     if self.is_unique(word, temp_text):
-        #         unique_words.append(word)
-        return set(self.text)
+        self.text = set(temp_text)
+        return self.text
+ 
 
 
 def main():
     book_analyzer = BookAnalyzer()
-    book_analyzer.read_data()
-    unique_words = book_analyzer.find_unique_words()
+    unique_words = book_analyzer.read_data()
     print("-" * 50)
     print(f"List of unique words (Count: {len(unique_words)})")
     print("-" * 50)
