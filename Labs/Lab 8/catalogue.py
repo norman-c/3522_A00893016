@@ -14,7 +14,7 @@ class Catalogue:
         """
         Add an item to the item list
         """
-        self._item_list.append(LibraryItemGenerator.create_item())
+        self._item_list.append(LibraryItemGenerator.create_item(self))
 
     def return_item(self, call_number):
         """

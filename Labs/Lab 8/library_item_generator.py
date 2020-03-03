@@ -1,6 +1,9 @@
 from book import Book
 from dvd import Dvd
 from journal import Journal
+from factory import BookFactory
+from factory import JournalFactory
+from factory import DvdFactory
 
 
 class LibraryItemGenerator:
@@ -22,7 +25,7 @@ class LibraryItemGenerator:
         return item_list
 
     @staticmethod
-    def create_item():
+    def create_item(self):
         """
         Gets user input to create item
         :return: item
@@ -35,57 +38,57 @@ class LibraryItemGenerator:
 
         user_input = int(string_input)
         if user_input == 1:
-            return LibraryItemGenerator.__create_book()
+            return BookFactory.create_item(self)
         if user_input == 2:
-            return LibraryItemGenerator.__create_journal()
+            return JournalFactory.create_item()
         if user_input == 3:
-            return LibraryItemGenerator.__create_dvd()
+            return DvdFactory.create_item()
 
-    @staticmethod
-    def __create_book():
-        """
-        Creates a book
-        :return: book
-        """
-        call_number = input("Enter Call Number: ")
-        title = input("Enter title: ")
-        num_copies = int(input("Enter number of copies "
-                               "(positive number): "))
-        book_data = (call_number, title, num_copies)
-        author = input("Enter Author Name: ")
-        new_book = Book(book_data[0], book_data[1], book_data[2], author)
-
-        return new_book
-
-    @staticmethod
-    def __create_journal():
-        """
-        Creates a journal
-        :return: a journal
-        """
-        call_number = input("Enter Call Number: ")
-        title = input("Enter title: ")
-        num_copies = int(input("Enter number of copies "
-                               "(positive number): "))
-        author = input("Enter Author Name: ")
-        issue_number = input("Enter Issue Number: ")
-        publisher = input("Enter Publisher: ")
-        new_journal = Journal(call_number, title, num_copies, author, issue_number, publisher)
-
-        return new_journal
-
-    @staticmethod
-    def __create_dvd():
-        """
-        Creates a dvd
-        :return: a dvd
-        """
-        call_number = input("Enter Call Number: ")
-        title = input("Enter title: ")
-        num_copies = int(input("Enter number of copies "
-                               "(positive number): "))
-        release_date = input("Enter release date: ")
-        region_code = input("Enter region_code: ")
-        new_dvd = Dvd(call_number, title, num_copies, release_date, region_code)
-
-        return new_dvd
+    # @staticmethod
+    # def __create_book():
+    #     """
+    #     Creates a book
+    #     :return: book
+    #     """
+    #     call_number = input("Enter Call Number: ")
+    #     title = input("Enter title: ")
+    #     num_copies = int(input("Enter number of copies "
+    #                            "(positive number): "))
+    #     book_data = (call_number, title, num_copies)
+    #     author = input("Enter Author Name: ")
+    #     new_book = Book(book_data[0], book_data[1], book_data[2], author)
+    #
+    #     return new_book
+    #
+    # @staticmethod
+    # def __create_journal():
+    #     """
+    #     Creates a journal
+    #     :return: a journal
+    #     """
+    #     call_number = input("Enter Call Number: ")
+    #     title = input("Enter title: ")
+    #     num_copies = int(input("Enter number of copies "
+    #                            "(positive number): "))
+    #     author = input("Enter Author Name: ")
+    #     issue_number = input("Enter Issue Number: ")
+    #     publisher = input("Enter Publisher: ")
+    #     new_journal = Journal(call_number, title, num_copies, author, issue_number, publisher)
+    #
+    #     return new_journal
+    #
+    # @staticmethod
+    # def __create_dvd():
+    #     """
+    #     Creates a dvd
+    #     :return: a dvd
+    #     """
+    #     call_number = input("Enter Call Number: ")
+    #     title = input("Enter title: ")
+    #     num_copies = int(input("Enter number of copies "
+    #                            "(positive number): "))
+    #     release_date = input("Enter release date: ")
+    #     region_code = input("Enter region_code: ")
+    #     new_dvd = Dvd(call_number, title, num_copies, release_date, region_code)
+    #
+    #     return new_dvd
