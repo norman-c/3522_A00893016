@@ -7,8 +7,9 @@
       <sourceFolder url="file://$MODULE_DIR$/Labs/Lab 4" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Labs/Lab 5" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Assignments/Assignment 1" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.6 (3522_A00893016)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
