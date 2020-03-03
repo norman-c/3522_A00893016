@@ -3,8 +3,8 @@ from item import Item
 
 class Journal(Item):
 
-    def __init__(self, call_num, title, num_copies, author, issue_number, publisher):
-        super().__init__(call_num, title, num_copies)
+    def __init__(self, author, issue_number, publisher, **kwargs):
+        super().__init__(**kwargs)
         self._issue_number = issue_number
         self._publisher = publisher
         self._author = author

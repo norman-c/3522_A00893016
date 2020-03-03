@@ -2,9 +2,8 @@ from item import Item
 
 
 class Dvd(Item):
-
-    def __init__(self, call_num, title, num_copies, release_date, region_code):
-        super().__init__(call_num, title, num_copies)
+    def __init__(self,  release_date, region_code, **kwargs):
+        super().__init__(**kwargs)
         self._release_date = release_date
         self._region_code = region_code
 

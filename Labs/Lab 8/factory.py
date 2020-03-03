@@ -20,9 +20,9 @@ class BookFactory(ItemFactory):
         title = input("Enter title: ")
         num_copies = int(input("Enter number of copies "
                                "(positive number): "))
-        book_data = (call_number, title, num_copies)
         author = input("Enter Author Name: ")
-        new_book = Book(book_data[0], book_data[1], book_data[2], author)
+        kwargs = {"call_num": call_number, "title": title, "num_copies": num_copies}
+        new_book = Book(author, **kwargs)
 
         return new_book
 
@@ -36,7 +36,8 @@ class DvdFactory(ItemFactory):
                                "(positive number): "))
         release_date = input("Enter release date: ")
         region_code = input("Enter region_code: ")
-        new_dvd = Dvd(call_number, title, num_copies, release_date, region_code)
+        kwargs = {"call_num": call_number, "title": title, "num_copies": num_copies}
+        new_dvd = Dvd(release_date, region_code, **kwargs)
 
         return new_dvd
 
@@ -51,6 +52,7 @@ class JournalFactory(ItemFactory):
         author = input("Enter Author Name: ")
         issue_number = input("Enter Issue Number: ")
         publisher = input("Enter Publisher: ")
-        new_journal = Journal(call_number, title, num_copies, author, issue_number, publisher)
+        kwargs = {"call_num": call_number, "title": title, "num_copies": num_copies}
+        new_journal = Journal(author, issue_number, publisher, kwargs)
 
         return new_journal

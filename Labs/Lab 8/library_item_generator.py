@@ -14,13 +14,13 @@ class LibraryItemGenerator:
         Return a list of items with dummy data.
         :return: a list
         """
+        kwargs1 = {"call_num": "100.200.300", "title": "Harry Potter 1", "num_copies": 2}
+        kwargs2 = {"call_num": "425.63.775", "title": "Toy Story", "num_copies": 2}
+        kwargs3 = {"call_num": "874.234.863", "title": "Science Journal", "num_copies": 5}
         item_list = [
-            Book("100.200.300", "Harry Potter 1", 2, "J K Rowling"),
-            Book("999.224.854", "Harry Potter 2", 5, "J K Rowling"),
-            Book("631.495.302", "Harry Potter 3", 4, "J K Rowling"),
-            Book("123.02.204", "The Cat in the Hat", 1, "Dr. Seuss"),
-            Dvd("425.63.775", "Toy Story", 2, "10-10-2004", "NA"),
-            Journal("874.234.863", "Science Journal", 1, "Dr. Smart", 7, "Pearsons")
+            Book("J K Rowling", **kwargs1),
+            Dvd("10-10-2004", "NA", **kwargs2),
+            Journal("Dr. Smart", 7, "Pearsons", **kwargs3)
         ]
         return item_list
 
@@ -40,9 +40,9 @@ class LibraryItemGenerator:
         if user_input == 1:
             return BookFactory.create_item(self)
         if user_input == 2:
-            return JournalFactory.create_item()
+            return JournalFactory.create_item(self)
         if user_input == 3:
-            return DvdFactory.create_item()
+            return DvdFactory.create_item(self)
 
     # @staticmethod
     # def __create_book():

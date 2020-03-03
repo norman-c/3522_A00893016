@@ -7,8 +7,8 @@ class Book(Item):
     it's call number.
     """
 
-    def __init__(self, call_num, title, num_copies, author):
-        super().__init__(call_num, title, num_copies)
+    def __init__(self, author, **kwargs):
+        super().__init__(**kwargs)
         self._author = author
 
     @property
