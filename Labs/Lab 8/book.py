@@ -1,7 +1,9 @@
+from abc import ABC
+
 from item import Item
 
 
-class Book(Item):
+class Book(Item, ABC):
     """
     Represents a single book in a library which is identified through
     it's call number.

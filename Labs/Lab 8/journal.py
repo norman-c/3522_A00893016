@@ -1,7 +1,9 @@
+from abc import ABC
+
 from item import Item
 
 
-class Journal(Item):
+class Journal(Item, ABC):
 
     def __init__(self, author, issue_number, publisher, **kwargs):
         super().__init__(**kwargs)

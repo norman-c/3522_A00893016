@@ -25,10 +25,10 @@ class Item(ABC):
     #     self.title = value
 
     def increment_number_of_copies(self):
-        super().increment_number_of_copies()
+        self._num_copies += 1
 
     def decrement_number_of_copies(self):
-        super().decrement_number_of_copies()
+        self._num_copies -= 1
 
     @property
     def num_copies(self):
@@ -47,7 +47,10 @@ class Item(ABC):
         return self._author
 
     def check_availability(self):
-        return super().check_availability()
+        if self._num_copies > 0:
+            return True
+        else:
+            return False
 
     @abstractmethod
     def __str__(self):
