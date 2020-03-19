@@ -48,7 +48,7 @@ class Request:
     def __str__(self):
         return f"Request: State: {self.encryption_state}, Data: {self.data_input}" \
                f", Input file: {self.input_file}, Output: {self.output}, " \
-               f"Key: {self.key}"
+               f"Key: {self.key}, Result: {self.result}"
 
 
 def setup_request_commandline() -> Request:
@@ -104,6 +104,12 @@ class BaseCryptoHandler(abc.ABC):
         self.next_handler = handler
 
 
+class ErrorHandler:
+    @staticmethod
+    def handle_error(error):
+        print(error)
+
+
 class EncryptHandler(BaseCryptoHandler):
 
     def handle_request(self, req: Request):
@@ -112,7 +118,7 @@ class EncryptHandler(BaseCryptoHandler):
             self.set_handler(KeyHandler)
             return self.next_handler.handle_request(KeyHandler, req)
         else:
-            return
+            return ErrorHandler.handle_error("Not in EN mode.")
 
 
 class KeyHandler(BaseCryptoHandler):
@@ -120,30 +126,41 @@ class KeyHandler(BaseCryptoHandler):
     def handle_request(self, req: Request):
         print("2")
         if req.key is not None:
-            req.key = bytes(req.key, encoding='utf-8')
+            req.key = DesKey(bytes(req.key, encoding='utf-8'))
             self.set_handler(self, InputHandler)
             return self.next_handler.handle_request(InputHandler, req)
         else:
-            return
+            return ErrorHandler.handle_error("No key provided.")
 
 
 class InputHandler(BaseCryptoHandler):
 
     def handle_request(self, req: Request):
         print("3")
-        if req.input_file is None:
-            if req.data_input is not None:
-                return "", True
-            else:
-                return "No data/file input to encrypt", False
+        if (req.input_file is not None) or (req.data_input is not None):
+            self.set_handler(self, OutputHandler)
+            return self.next_handler.handle_request(self, req)
         else:
-            return "", True
+            return ErrorHandler.handle_error("No data/file input to encrypt")
 
 
 class OutputHandler(BaseCryptoHandler):
 
     def handle_request(self, req: Request):
-        pass
+        if req.input_file is not None:
+            f = open(req.input_file, "r")
+            data = (f.read())
+            if req.output == "print":
+                req.result = (req.key.encrypt(bytes(data, encoding='utf-8'), padding=True))
+                return req
+            else:
+                print("Here")
+        else:
+            if req.output == "print":
+                req.result = (req.key.encrypt(bytes(req.data_input, encoding='utf-8'), padding=True))
+                return req
+            else:
+                print("Here")
 
 
 class Crypto:
@@ -155,10 +172,9 @@ class Crypto:
     def execute_request(self, req: Request):
         if req.encryption_state == CryptoMode.EN:
             result = self.encryption_start_handler.handle_request(req)
-
+            print(result)
         else:
             print("hello")
-
 
 
 def main(request: Request):
