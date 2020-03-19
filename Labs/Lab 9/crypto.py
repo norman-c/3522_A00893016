@@ -114,7 +114,6 @@ class EncryptHandler(BaseCryptoHandler):
 
     def handle_request(self, req: Request):
         if req.encryption_state == CryptoMode.EN:
-            print("1")
             self.set_handler(KeyHandler)
             return self.next_handler.handle_request(KeyHandler, req)
         else:
@@ -124,7 +123,6 @@ class EncryptHandler(BaseCryptoHandler):
 class KeyHandler(BaseCryptoHandler):
 
     def handle_request(self, req: Request):
-        print("2")
         if req.key is not None:
             req.key = DesKey(bytes(req.key, encoding='utf-8'))
             self.set_handler(self, InputHandler)
@@ -136,7 +134,6 @@ class KeyHandler(BaseCryptoHandler):
 class InputHandler(BaseCryptoHandler):
 
     def handle_request(self, req: Request):
-        print("3")
         if (req.input_file is not None) or (req.data_input is not None):
             self.set_handler(self, OutputHandler)
             return self.next_handler.handle_request(self, req)
@@ -150,36 +147,107 @@ class OutputHandler(BaseCryptoHandler):
         if req.input_file is not None:
             f = open(req.input_file, "r")
             data = (f.read())
+            f.close()
             if req.output == "print":
                 req.result = (req.key.encrypt(bytes(data, encoding='utf-8'), padding=True))
                 return req
             else:
-                print("Here")
+                file = open(req.output, "wb")
+                req.result = (req.key.encrypt(bytes(data, encoding='utf-8'), padding=True))
+                file.write(req.result)
+                file.close()
         else:
             if req.output == "print":
                 req.result = (req.key.encrypt(bytes(req.data_input, encoding='utf-8'), padding=True))
                 return req
             else:
-                print("Here")
+                file = open(req.output, "wb")
+                req.result = (req.key.encrypt(bytes(req.data_input, encoding='utf-8'), padding=True))
+                file.write(req.result)
+                file.close()
+
+
+class DecryptHandler(BaseCryptoHandler):
+
+    def handle_request(self, req: Request):
+        if req.encryption_state == CryptoMode.DE:
+            self.set_handler(KeyHandlerDe)
+            return self.next_handler.handle_request(KeyHandlerDe, req)
+        else:
+            return ErrorHandler.handle_error("Not in DE mode.")
+
+
+class KeyHandlerDe(BaseCryptoHandler):
+
+    def handle_request(self, req: Request):
+        if req.key is not None:
+            req.key = DesKey(bytes(req.key, encoding='utf-8'))
+            self.set_handler(self, InputHandlerDe)
+            return self.next_handler.handle_request(InputHandlerDe, req)
+        else:
+            return ErrorHandler.handle_error("No key provided.")
+
+
+class InputHandlerDe(BaseCryptoHandler):
+
+    def handle_request(self, req: Request):
+        if (req.input_file is not None) or (req.data_input is not None):
+            self.set_handler(self, OutputHandlerDe)
+            return self.next_handler.handle_request(self, req)
+        else:
+            return ErrorHandler.handle_error("No data/file input to decrypt")
+
+
+class OutputHandlerDe(BaseCryptoHandler):
+
+    def handle_request(self, req: Request):
+        if req.input_file is not None:
+            f = open(req.input_file, "r")
+            data = (f.read())
+            f.close()
+            if req.output == "print":
+                req.result = (req.key.decrypt(str.encode(data), padding=True))
+                return req
+            else:
+                file = open(req.output, "wb")
+                req.result = (req.key.decrypt(data, padding=True))
+                file.write(req.result)
+                file.close()
+        else:
+            if req.output == "print":
+                req.result = (req.key.decrypt(str.encode(req.data_input), padding=True))
+                return req
+            else:
+                file = open(req.output, "wb")
+                req.result = (req.key.decrypt(req.data_input, padding=True))
+                file.write(req.result)
+                file.close()
 
 
 class Crypto:
 
     def __init__(self):
         self.encryption_start_handler = EncryptHandler()
-        self.decryption_start_handler = None
+        self.decryption_start_handler = DecryptHandler()
 
     def execute_request(self, req: Request):
         if req.encryption_state == CryptoMode.EN:
             result = self.encryption_start_handler.handle_request(req)
             print(result)
         else:
-            print("hello")
+            print("de")
+            result = self.decryption_start_handler.handle_request(req)
+            print(result)
 
 
 def main(request: Request):
     crypto = Crypto()
     crypto.execute_request(request)
+    # key1 = DesKey(b"some key")
+    # key2 = DesKey(b"diff key")
+    # test = (key1.encrypt(b"helloworld", padding=True))
+    # print(test)
+    # print(key2.decrypt(test, padding=True))
 
 
 if __name__ == '__main__':
