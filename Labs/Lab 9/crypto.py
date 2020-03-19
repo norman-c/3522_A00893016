@@ -1,6 +1,6 @@
 from abc import ABC
 
-import des
+from des import DesKey
 import argparse
 import abc
 import enum
@@ -97,49 +97,73 @@ class BaseCryptoHandler(abc.ABC):
         self.next_handler = next_handler
 
     @abc.abstractmethod
-    def handle_request(self, req) -> (str, bool):
+    def handle_request(self, req):
         pass
 
     def set_handler(self, handler):
         self.next_handler = handler
 
 
+class EncryptHandler(BaseCryptoHandler):
+
+    def handle_request(self, req: Request):
+        if req.encryption_state == CryptoMode.EN:
+            print("1")
+            self.set_handler(KeyHandler)
+            return self.next_handler.handle_request(KeyHandler, req)
+        else:
+            return
+
+
 class KeyHandler(BaseCryptoHandler):
 
-    def handle_request(self, req) -> (str, bool):
-        pass
-
-
-class StateHandler(BaseCryptoHandler):
-
-    def handle_request(self, req) -> (str, bool):
-        pass
+    def handle_request(self, req: Request):
+        print("2")
+        if req.key is not None:
+            req.key = bytes(req.key, encoding='utf-8')
+            self.set_handler(self, InputHandler)
+            return self.next_handler.handle_request(InputHandler, req)
+        else:
+            return
 
 
 class InputHandler(BaseCryptoHandler):
 
-    def handle_request(self, req) -> (str, bool):
-        pass
+    def handle_request(self, req: Request):
+        print("3")
+        if req.input_file is None:
+            if req.data_input is not None:
+                return "", True
+            else:
+                return "No data/file input to encrypt", False
+        else:
+            return "", True
 
 
 class OutputHandler(BaseCryptoHandler):
 
-    def handle_request(self, req) -> (str, bool):
+    def handle_request(self, req: Request):
         pass
 
 
 class Crypto:
 
     def __init__(self):
-        self.encryption_start_handler = None
+        self.encryption_start_handler = EncryptHandler()
         self.decryption_start_handler = None
 
-    def execute_request(self, request: Request):
-        pass
+    def execute_request(self, req: Request):
+        if req.encryption_state == CryptoMode.EN:
+            result = self.encryption_start_handler.handle_request(req)
+
+        else:
+            print("hello")
+
 
 
 def main(request: Request):
-    pass
+    crypto = Crypto()
+    crypto.execute_request(request)
 
 
 if __name__ == '__main__':
