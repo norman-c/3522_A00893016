@@ -202,26 +202,31 @@ class OutputHandlerDe(BaseCryptoHandler):
 
     def handle_request(self, req: Request):
         if req.input_file is not None:
-            f = open(req.input_file, "r")
+            f = open(req.input_file, "rb")
             data = (f.read())
             f.close()
             if req.output == "print":
-                req.result = (req.key.decrypt(str.encode(data), padding=True))
+                req.result = (req.key.decrypt(data, padding=True))
                 return req
             else:
                 file = open(req.output, "wb")
                 req.result = (req.key.decrypt(data, padding=True))
                 file.write(req.result)
                 file.close()
+                return "Written to file"
         else:
             if req.output == "print":
-                req.result = (req.key.decrypt(str.encode(req.data_input), padding=True))
+                # This is to get rid of the double back slash error when converting to bytes from string
+                temp = ((bytes(req.data_input, encoding='utf-8')).decode('unicode-escape').encode('ISO-8859-1'))
+                req.result = (req.key.decrypt(temp, padding=True))
                 return req
             else:
                 file = open(req.output, "wb")
-                req.result = (req.key.decrypt(req.data_input, padding=True))
+                temp = ((bytes(req.data_input, encoding='utf-8')).decode('unicode-escape').encode('ISO-8859-1'))
+                req.result = (req.key.decrypt(temp, padding=True))
                 file.write(req.result)
                 file.close()
+                return "Written to file"
 
 
 class Crypto:
@@ -235,7 +240,6 @@ class Crypto:
             result = self.encryption_start_handler.handle_request(req)
             print(result)
         else:
-            print("de")
             result = self.decryption_start_handler.handle_request(req)
             print(result)
 
@@ -243,11 +247,13 @@ class Crypto:
 def main(request: Request):
     crypto = Crypto()
     crypto.execute_request(request)
-    # key1 = DesKey(b"some key")
-    # key2 = DesKey(b"diff key")
-    # test = (key1.encrypt(b"helloworld", padding=True))
-    # print(test)
-    # print(key2.decrypt(test, padding=True))
+    # key2 = DesKey(b"some key")
+    # test1 = key2.encrypt(b'helloworld', padding=True)
+    # # test2 = str.encode('\xb5\x99\x87d$j\x8f\xca\xb9\xe6\xf5\xc7\xc6\xddv\xf2')
+    # # print(test2)
+    # print(test1)
+    # print(str.encode('\xb5\x99\x87d$j\x8f\xca\xb9\xe6\xf5\xc7\xc6\xddv\xf2'))
+    # print(key2.decrypt(b'\xb5\x99\x87d$j\x8f\xca\xb9\xe6\xf5\xc7\xc6\xddv\xf2', padding=True))
 
 
 if __name__ == '__main__':
