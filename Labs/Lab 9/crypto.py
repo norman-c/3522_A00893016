@@ -156,6 +156,7 @@ class OutputHandler(BaseCryptoHandler):
                 req.result = (req.key.encrypt(bytes(data, encoding='utf-8'), padding=True))
                 file.write(req.result)
                 file.close()
+                return "Written to file"
         else:
             if req.output == "print":
                 req.result = (req.key.encrypt(bytes(req.data_input, encoding='utf-8'), padding=True))
@@ -165,6 +166,7 @@ class OutputHandler(BaseCryptoHandler):
                 req.result = (req.key.encrypt(bytes(req.data_input, encoding='utf-8'), padding=True))
                 file.write(req.result)
                 file.close()
+                return "Written to file"
 
 
 class DecryptHandler(BaseCryptoHandler):
